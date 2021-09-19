@@ -17,7 +17,7 @@ struct GridContentView: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: horizontalSpacing/2) {
                     ForEach(0..<cards.count) { i in
                         if i % Int(itemPerRow) == 0 {
                             buildView(rowIndex: i, geometry: geometry)
@@ -36,7 +36,10 @@ struct GridContentView: View {
             }
         }
         if !rowCards.isEmpty {
-            return RowView(cards: rowCards, width: getWidth(geometry: geometry), height: height, horizontalSpacing: horizontalSpacing)
+            return RowView(cards: rowCards,
+                           width: getWidth(geometry: geometry),
+                           height: height,
+                           horizontalSpacing: horizontalSpacing)
         }
         
         return nil
@@ -71,6 +74,6 @@ struct RowView: View {
                     .frame(width: width, height: height)
             }
         }
-        .padding()
+        .padding(.leading, horizontalSpacing)
     }
 }
